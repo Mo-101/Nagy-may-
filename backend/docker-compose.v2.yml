@@ -24,7 +24,7 @@ services:
 
   ml-service:
     build:
-      context: ./ml_service
+      context: ./ai_services/ml_service
       dockerfile: Dockerfile
     container_name: skyhawk_ml
     env_file: .env
@@ -48,7 +48,7 @@ services:
 
   capture-service:
     build:
-      context: ./capture_service
+      context: ./ai_services/capture_service
       dockerfile: Dockerfile
     container_name: skyhawk_capture
     env_file: .env
@@ -68,7 +68,7 @@ services:
 
   api-service:
     build:
-      context: ./MNTRK_API
+      context: ./api_services/mntrk_api
       dockerfile: Dockerfile
     container_name: skyhawk_api
     env_file: .env
@@ -94,7 +94,7 @@ services:
 
   agent-service:
     build:
-      context: ./MNTRK_Agent_API
+      context: ./api_services/agent_api
       dockerfile: Dockerfile
     container_name: skyhawk_agent
     env_file: .env
