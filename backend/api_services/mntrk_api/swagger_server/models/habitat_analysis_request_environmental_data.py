@@ -14,20 +14,20 @@ class HabitatAnalysisRequestEnvironmentalData(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, temperature: Object=None, rainfall: Object=None, vegetation_index: Object=None):  # noqa: E501
+    def __init__(self, temperature: object=None, rainfall: object=None, vegetation_index: object=None):  # noqa: E501
         """HabitatAnalysisRequestEnvironmentalData - a model defined in Swagger
 
         :param temperature: The temperature of this HabitatAnalysisRequestEnvironmentalData.  # noqa: E501
-        :type temperature: Object
+        :type temperature: object
         :param rainfall: The rainfall of this HabitatAnalysisRequestEnvironmentalData.  # noqa: E501
-        :type rainfall: Object
+        :type rainfall: object
         :param vegetation_index: The vegetation_index of this HabitatAnalysisRequestEnvironmentalData.  # noqa: E501
-        :type vegetation_index: Object
+        :type vegetation_index: object
         """
         self.swagger_types = {
-            'temperature': Object,
-            'rainfall': Object,
-            'vegetation_index': Object
+            'temperature': object,
+            'rainfall': object,
+            'vegetation_index': object
         }
 
         self.attribute_map = {
@@ -51,64 +51,64 @@ class HabitatAnalysisRequestEnvironmentalData(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def temperature(self) -> Object:
+    def temperature(self) -> object:
         """Gets the temperature of this HabitatAnalysisRequestEnvironmentalData.
 
 
         :return: The temperature of this HabitatAnalysisRequestEnvironmentalData.
-        :rtype: Object
+        :rtype: object
         """
         return self._temperature
 
     @temperature.setter
-    def temperature(self, temperature: Object):
+    def temperature(self, temperature: object):
         """Sets the temperature of this HabitatAnalysisRequestEnvironmentalData.
 
 
         :param temperature: The temperature of this HabitatAnalysisRequestEnvironmentalData.
-        :type temperature: Object
+        :type temperature: object
         """
 
         self._temperature = temperature
 
     @property
-    def rainfall(self) -> Object:
+    def rainfall(self) -> object:
         """Gets the rainfall of this HabitatAnalysisRequestEnvironmentalData.
 
 
         :return: The rainfall of this HabitatAnalysisRequestEnvironmentalData.
-        :rtype: Object
+        :rtype: object
         """
         return self._rainfall
 
     @rainfall.setter
-    def rainfall(self, rainfall: Object):
+    def rainfall(self, rainfall: object):
         """Sets the rainfall of this HabitatAnalysisRequestEnvironmentalData.
 
 
         :param rainfall: The rainfall of this HabitatAnalysisRequestEnvironmentalData.
-        :type rainfall: Object
+        :type rainfall: object
         """
 
         self._rainfall = rainfall
 
     @property
-    def vegetation_index(self) -> Object:
+    def vegetation_index(self) -> object:
         """Gets the vegetation_index of this HabitatAnalysisRequestEnvironmentalData.
 
 
         :return: The vegetation_index of this HabitatAnalysisRequestEnvironmentalData.
-        :rtype: Object
+        :rtype: object
         """
         return self._vegetation_index
 
     @vegetation_index.setter
-    def vegetation_index(self, vegetation_index: Object):
+    def vegetation_index(self, vegetation_index: object):
         """Sets the vegetation_index of this HabitatAnalysisRequestEnvironmentalData.
 
 
         :param vegetation_index: The vegetation_index of this HabitatAnalysisRequestEnvironmentalData.
-        :type vegetation_index: Object
+        :type vegetation_index: object
         """
 
         self._vegetation_index = vegetation_index

@@ -14,14 +14,14 @@ class DataTransformationRequest(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, dataset_url: Object=None):  # noqa: E501
+    def __init__(self, dataset_url: object=None):  # noqa: E501
         """DataTransformationRequest - a model defined in Swagger
 
         :param dataset_url: The dataset_url of this DataTransformationRequest.  # noqa: E501
-        :type dataset_url: Object
+        :type dataset_url: object
         """
         self.swagger_types = {
-            'dataset_url': Object
+            'dataset_url': object
         }
 
         self.attribute_map = {
@@ -41,22 +41,22 @@ class DataTransformationRequest(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def dataset_url(self) -> Object:
+    def dataset_url(self) -> object:
         """Gets the dataset_url of this DataTransformationRequest.
 
 
         :return: The dataset_url of this DataTransformationRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._dataset_url
 
     @dataset_url.setter
-    def dataset_url(self, dataset_url: Object):
+    def dataset_url(self, dataset_url: object):
         """Sets the dataset_url of this DataTransformationRequest.
 
 
         :param dataset_url: The dataset_url of this DataTransformationRequest.
-        :type dataset_url: Object
+        :type dataset_url: object
         """
 
         self._dataset_url = dataset_url

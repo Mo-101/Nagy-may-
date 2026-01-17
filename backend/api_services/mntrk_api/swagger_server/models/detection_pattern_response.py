@@ -15,16 +15,16 @@ class DetectionPatternResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, id: Object=None, location: HabitatAnalysisRequestGeographicCoordinates=None):  # noqa: E501
+    def __init__(self, id: object=None, location: HabitatAnalysisRequestGeographicCoordinates=None):  # noqa: E501
         """DetectionPatternResponse - a model defined in Swagger
 
         :param id: The id of this DetectionPatternResponse.  # noqa: E501
-        :type id: Object
+        :type id: object
         :param location: The location of this DetectionPatternResponse.  # noqa: E501
         :type location: HabitatAnalysisRequestGeographicCoordinates
         """
         self.swagger_types = {
-            'id': Object,
+            'id': object,
             'location': HabitatAnalysisRequestGeographicCoordinates
         }
 
@@ -47,22 +47,22 @@ class DetectionPatternResponse(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def id(self) -> Object:
+    def id(self) -> object:
         """Gets the id of this DetectionPatternResponse.
 
 
         :return: The id of this DetectionPatternResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._id
 
     @id.setter
-    def id(self, id: Object):
+    def id(self, id: object):
         """Sets the id of this DetectionPatternResponse.
 
 
         :param id: The id of this DetectionPatternResponse.
-        :type id: Object
+        :type id: object
         """
 
         self._id = id

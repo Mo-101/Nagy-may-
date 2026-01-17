@@ -28,6 +28,7 @@ pyyaml>=6.0
 
 # Neo4j integration
 neo4j>=5.0.0
+supabase>=2.0.0
 
 # Utilities
 python-dotenv>=1.0.0

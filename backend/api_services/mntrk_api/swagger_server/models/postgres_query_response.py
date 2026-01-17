@@ -14,17 +14,17 @@ class PostgresQueryResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, data: Object=None, metadata: Object=None):  # noqa: E501
+    def __init__(self, data: object=None, metadata: object=None):  # noqa: E501
         """PostgresQueryResponse - a model defined in Swagger
 
         :param data: The data of this PostgresQueryResponse.  # noqa: E501
-        :type data: Object
+        :type data: object
         :param metadata: The metadata of this PostgresQueryResponse.  # noqa: E501
-        :type metadata: Object
+        :type metadata: object
         """
         self.swagger_types = {
-            'data': Object,
-            'metadata': Object
+            'data': object,
+            'metadata': object
         }
 
         self.attribute_map = {
@@ -46,47 +46,47 @@ class PostgresQueryResponse(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def data(self) -> Object:
+    def data(self) -> object:
         """Gets the data of this PostgresQueryResponse.
 
         Query results from Postgres  # noqa: E501
 
         :return: The data of this PostgresQueryResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._data
 
     @data.setter
-    def data(self, data: Object):
+    def data(self, data: object):
         """Sets the data of this PostgresQueryResponse.
 
         Query results from Postgres  # noqa: E501
 
         :param data: The data of this PostgresQueryResponse.
-        :type data: Object
+        :type data: object
         """
 
         self._data = data
 
     @property
-    def metadata(self) -> Object:
+    def metadata(self) -> object:
         """Gets the metadata of this PostgresQueryResponse.
 
         Query execution metadata  # noqa: E501
 
         :return: The metadata of this PostgresQueryResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._metadata
 
     @metadata.setter
-    def metadata(self, metadata: Object):
+    def metadata(self, metadata: object):
         """Sets the metadata of this PostgresQueryResponse.
 
         Query execution metadata  # noqa: E501
 
         :param metadata: The metadata of this PostgresQueryResponse.
-        :type metadata: Object
+        :type metadata: object
         """
 
         self._metadata = metadata

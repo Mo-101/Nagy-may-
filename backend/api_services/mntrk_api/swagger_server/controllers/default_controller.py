@@ -1,6 +1,20 @@
 import connexion
-from polars import Object
+# Removed invalid polars import
 import six
+import os
+from langchain_openai import ChatOpenAI
+from langchain_community.graphs import Neo4jGraph
+
+# Surgical fix for LangChain reorganization
+try:
+    from langchain_experimental.graph_transformers.llm import GraphCypherQAChain
+except ImportError:
+    try:
+        from langchain_community.chains.graph_qa.cypher import GraphCypherQAChain
+    except ImportError:
+        GraphCypherQAChain = None
+        import logging
+        logging.warning("[CORE API] GraphCypherQAChain not available - Cypher RAG disabled")
 
 from swagger_server.models.adaptive_learning_request import AdaptiveLearningRequest  # noqa: E501
 from swagger_server.models.adaptive_learning_response import AdaptiveLearningResponse  # noqa: E501
@@ -36,192 +50,50 @@ from enum import Enum
 
 logger = logging.getLogger(__name__)
 
-# --- EMBEDDED CONSCIOUSNESS MODULE ---
-class RiskLevel(Enum):
-    LOW = "low"
-    MEDIUM = "medium" 
-    HIGH = "high"
-    CRITICAL = "critical"
+# --- REMOSTAR CONSCIOUSNESS ENGINE (SHARED) ---
+import sys
+import os
 
-class ConsciousnessLevel(Enum):
-    DORMANT = 0.0
-    AWARE = 0.3
-    ALERT = 0.6
-    HEIGHTENED = 0.8
-    TRANSCENDENT = 1.0
+# Mount shared AI services
+try:
+    sys.path.append("/app/ai_services_shared/consciousness")
+    from remostar_integration import analyze_detection_consciousness
+    REMOSTAR_AVAILABLE = True
+    logger.info("Shared Remostar Consciousness Engine loaded successfully")
+except ImportError as e:
+    logger.warning(f"Shared Consciousness Engine not found: {e}")
+    REMOSTAR_AVAILABLE = False
+    
+    # Fallback function if shared module fails
+    def analyze_detection_consciousness(detection_data: Dict, clinical_context: Optional[Dict] = None, environmental_context: Optional[Dict] = None) -> Dict:
+        return {
+            "status": "fallback_error",
+            "error": "Shared consciousness module not found",
+            "risk_assessment": {"level": "unknown", "score": 0.0}
+        }
 
-# Simplified Ifá Odu patterns for Core API
-IFA_ODU_SIMPLE = {
-    "Eji_Ogbe": {"meaning": "Clear and present danger", "risk_factor": 1.2},
-    "Oyeku_Meji": {"meaning": "Hidden threats emerge", "risk_factor": 1.4},
-    "Iwori_Meji": {"meaning": "Disease patterns shifting", "risk_factor": 0.9},
-    "Irosun_Meji": {"meaning": "Rapid transmission", "risk_factor": 1.6},
-    "Obara_Meji": {"meaning": "Community impact", "risk_factor": 1.3},
-    "Okanran_Meji": {"meaning": "Isolated incident", "risk_factor": 0.7}
-}
-
-def analyze_detection_consciousness(detection_data: Dict, clinical_context: Optional[Dict] = None, environmental_context: Optional[Dict] = None) -> Dict:
-    """
-    Embedded consciousness analysis function
-    (Simplified version until proper import is fixed)
-    """
+def detect(body=None):  # noqa: E501
+    """Analyze detection with Consciousness Engine"""
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
     
     try:
-        # Extract basic detection info
-        detections = detection_data.get('detections', [])
-        species_list = [d.get('species', '') for d in detections]
-        confidence_scores = [d.get('confidence', 0.0) for d in detections]
-        
-        # Simplified Odu divination
-        odu_pattern = _simple_odu_divination(species_list, confidence_scores)
-        odu_info = IFA_ODU_SIMPLE.get(odu_pattern, {"meaning": "Unknown pattern", "risk_factor": 1.0})
-        
-        # Basic risk calculation
-        risk_score = _calculate_simple_risk(species_list, confidence_scores, odu_info['risk_factor'])
-        
-        # Consciousness analysis result
-        consciousness_analysis = {
-            "status": "embedded_consciousness",
-            "timestamp": datetime.utcnow().isoformat(),
-            "odu_pattern": odu_pattern,
-            "odu_interpretation": odu_info['meaning'],
-            "ubuntu_guidance": "Community vigilance protects all",
-            "risk_assessment": {
-                "score": round(risk_score, 3),
-                "level": _determine_risk_level(risk_score),
-                "factors": _identify_risk_factors(species_list)
-            },
-            "consciousness_metrics": {
-                "awareness_level": min(0.8, risk_score * 1.2),
-                "consciousness_state": "ALERT" if risk_score > 0.6 else "AWARE",
-                "consciousness_active": True
-            },
-            "reasoning_chain": [
-                f"Species analysis: {len(species_list)} specimens detected",
-                f"Ifá guidance: {odu_pattern} - {odu_info['meaning']}",
-                f"Risk assessment: {_determine_risk_level(risk_score)} level",
-                "Ubuntu principle: Individual health affects community wellbeing"
-            ],
-            "recommendations": _generate_simple_recommendations(risk_score, species_list),
-            "african_context": {
-                "endemic_zone": True,  # Simplified - assume West African context
-                "seasonal_risk": _assess_simple_seasonal_risk(environmental_context),
-                "cultural_factors": ["Community-centered response", "Traditional knowledge integration"]
-            }
-        }
-        
-        return consciousness_analysis
-        
+        # Extract detection and optional context
+        detection_data = body.get("detection_data", {})
+        clinical_context = body.get("clinical_context", {})
+        environmental_context = body.get("environmental_context", {})
+
+        # Analyze with Shared RemostarEngine
+        logger.info("[CORE API] Processing /detect request with Consciousness Engine")
+        result = analyze_detection_consciousness(
+            detection_data=detection_data,
+            clinical_context=clinical_context,
+            environmental_context=environmental_context
+        )
+        return result
     except Exception as e:
-        # Fallback analysis
-        return {
-            "status": "embedded_fallback",
-            "error": str(e),
-            "odu_pattern": "Oyeku_Meji",
-            "odu_interpretation": "Operating in limited awareness",
-            "risk_assessment": {"score": 0.5, "level": "medium", "factors": ["Analysis error"]},
-            "consciousness_metrics": {"awareness_level": 0.2, "consciousness_active": False},
-            "reasoning_chain": ["Embedded consciousness error", "Using minimal fallback"],
-            "recommendations": ["Verify full consciousness system"]
-        }
-
-def _simple_odu_divination(species: List[str], confidence: List[float]) -> str:
-    """Simplified Odu pattern selection"""
-    if "Mastomys_natalensis" in species:
-        max_conf = max(confidence) if confidence else 0.0
-        if max_conf > 0.9:
-            return "Eji_Ogbe"  # Clear danger
-        elif len(species) > 3:
-            return "Obara_Meji"  # Community impact
-        else:
-            return "Irosun_Meji"  # Rapid transmission risk
-    elif len(species) > 5:
-        return "Obara_Meji"  # Multiple species
-    elif len(species) == 0:
-        return "Oyeku_Meji"  # Hidden/no visible threat
-    else:
-        return "Okanran_Meji"  # Isolated incident
-
-def _calculate_simple_risk(species: List[str], confidence: List[float], odu_factor: float) -> float:
-    """Simplified risk calculation"""
-    # Species component
-    species_risk = 0.0
-    if "Mastomys_natalensis" in species:
-        species_risk = 0.9
-    elif any("Mastomys" in s for s in species):
-        species_risk = 0.4
-    else:
-        species_risk = 0.1
-    
-    # Confidence component
-    conf_risk = max(confidence) if confidence else 0.5
-    
-    # Simple weighted calculation
-    base_risk = (species_risk * 0.7) + (conf_risk * 0.3)
-    
-    # Apply Odu factor
-    final_risk = base_risk * odu_factor
-    
-    return max(0.0, min(1.0, final_risk))
-
-def _determine_risk_level(risk_score: float) -> str:
-    """Convert risk score to level"""
-    if risk_score >= 0.80:
-        return "critical"
-    elif risk_score >= 0.65:
-        return "high"
-    elif risk_score >= 0.40:
-        return "medium"
-    else:
-        return "low"
-
-def _identify_risk_factors(species: List[str]) -> List[str]:
-    """Identify present risk factors"""
-    factors = []
-    if "Mastomys_natalensis" in species:
-        factors.append("Primary Lassa reservoir species detected")
-    if len(species) > 3:
-        factors.append("Multiple rodent species present")
-    return factors
-
-def _generate_simple_recommendations(risk_score: float, species: List[str]) -> List[str]:
-    """Generate basic recommendations"""
-    recommendations = []
-    
-    if risk_score > 0.75:
-        recommendations.extend([
-            "Immediate community health education",
-            "Coordinate with clinical response teams",
-            "Establish enhanced surveillance"
-        ])
-    elif risk_score > 0.50:
-        recommendations.extend([
-            "Enhanced rodent control measures",
-            "Community awareness programs"
-        ])
-    
-    if "Mastomys_natalensis" in species:
-        recommendations.append("Priority focus on Lassa fever prevention")
-    
-    recommendations.append("Engage community leaders in health planning")
-    return recommendations
-
-def _assess_simple_seasonal_risk(environmental_context: Optional[Dict]) -> str:
-    """Assess seasonal risk simply"""
-    if environmental_context:
-        if environmental_context.get('peak_transmission_period'):
-            return "peak_season"
-        elif environmental_context.get('season') == 'dry':
-            return "elevated"
-    
-    # Fallback based on current month
-    current_month = datetime.now().month
-    if current_month in [12, 1, 2, 3]:
-        return "peak_season"
-    elif current_month in [11, 4]:
-        return "elevated"
-    else:
-        return "baseline"
+        logger.error(f"[CORE API] /detect failed: {e}")
+        return {"error": f"Detection analysis failed: {str(e)}"}, 500
 
 
 
@@ -300,19 +172,93 @@ def detect_anomalies(body):  # noqa: E501
     return 'do some magic!'
 
 
-def generate_lang_chain_insights(body):  # noqa: E501
-    """Generate AI insights using LangChain
+def health_check():
+    """Health check endpoint"""
+    return {"status": "healthy", "service": "Core API", "timestamp": datetime.utcnow().isoformat()}
 
-     # noqa: E501
-
-    :param body: 
-    :type body: dict | bytes
-
-    :rtype: LangChainResponse
-    """
+def analyze_risk(body=None):
+    """Perform deep neutrosophic risk analysis"""
     if connexion.request.is_json:
-        body = LangChainRequest.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+        body = connexion.request.get_json()
+    
+    try:
+        # For now, we reuse the RemostarEngine but with a cluster-aware context
+        logger.info("[CORE API] Processing /risk-analysis request cluster")
+        
+        # Check if this is a regional query (from Mostar Grid)
+        region = body.get("region")
+        lat = body.get("latitude")
+        lon = body.get("longitude")
+        
+        if region or (lat is not None and lon is not None):
+            # Query the Knowledge Graph for historical patterns
+            try:
+                from consciousness.grid_manager import grid_manager
+                regional_data = grid_manager.query_regional_risk(region=region, lat=lat, lon=lon)
+                return regional_data
+            except ImportError:
+                logger.warning("[CORE API] GridManager not available, using fallback logic")
+        
+        # Fallback: Aggregate multiple detections if provided
+        detections = body.get("detections", [])
+        if not detections and "detection_data" in body:
+            detections = [body["detection_data"]]
+            
+        # Perform deep analysis (logic would iterate and correlate)
+        results = []
+        for det in detections:
+            analysis = analyze_detection_consciousness(det, body.get("clinical_context"), body.get("environmental_context"))
+            results.append(analysis)
+            
+        return {
+            "status": "success",
+            "cluster_risk": max([r["risk_assessment"]["score"] for r in results]) if results else 0,
+            "analyses": results
+        }
+    except Exception as e:
+        logger.error(f"[CORE API] /risk-analysis failed: {e}")
+        return {"error": str(e)}, 500
+
+def handle_rag_query(body=None):  # noqa: E501
+    """Generate AI insights using LangChain (RAG)"""
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+    
+    question = body.get("question", body.get("prompt", ""))
+    
+    try:
+        # Initialize Mostar Grid RAG chain
+        graph = Neo4jGraph(
+            url=os.getenv("NEO4J_URI", "bolt://skyhawk_graph:7687"),
+            username=os.getenv("NEO4J_USER", "neo4j"),
+            password=os.getenv("NEO4J_PASSWORD", "mostar123")
+        )
+        
+        # Use DCX0 (Ollama) as the LLM
+        llm = ChatOpenAI(
+            openai_api_base=os.getenv("DCX0_ENDPOINT", "http://host.docker.internal:11434") + "/v1",
+            openai_api_key="none",
+            model_name="Mostar/mostar-ai:dcx2" # Correct model from Ollama
+        )
+        
+        chain = GraphCypherQAChain.from_llm(
+            llm=llm,
+            graph=graph,
+            verbose=True,
+            allow_dangerous_requests=True
+        )
+        
+        logger.info(f"[CORE API] Running RAG query: {question}")
+        response = chain.run(question)
+        
+        return {
+            "question": question,
+            "answer": response,
+            "source": "Mostar Grid Knowledge Graph"
+        }
+    except Exception as e:
+        logger.error(f"[CORE API] RAG query failed: {e}")
+        return {"error": f"RAG query failed: {str(e)}"}, 500
 
 
 def integrate_google_vision(body):  # noqa: E501

@@ -14,14 +14,14 @@ class AdaptiveLearningResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, message: Object=None):  # noqa: E501
+    def __init__(self, message: object=None):  # noqa: E501
         """AdaptiveLearningResponse - a model defined in Swagger
 
         :param message: The message of this AdaptiveLearningResponse.  # noqa: E501
-        :type message: Object
+        :type message: object
         """
         self.swagger_types = {
-            'message': Object
+            'message': object
         }
 
         self.attribute_map = {
@@ -41,22 +41,22 @@ class AdaptiveLearningResponse(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def message(self) -> Object:
+    def message(self) -> object:
         """Gets the message of this AdaptiveLearningResponse.
 
 
         :return: The message of this AdaptiveLearningResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._message
 
     @message.setter
-    def message(self, message: Object):
+    def message(self, message: object):
         """Sets the message of this AdaptiveLearningResponse.
 
 
         :param message: The message of this AdaptiveLearningResponse.
-        :type message: Object
+        :type message: object
         """
 
         self._message = message

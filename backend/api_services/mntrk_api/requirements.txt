@@ -1,8 +1,8 @@
 # Core API framework
-connexion[swagger-ui]>=2.14.0
-flask>=2.3.0
+connexion[swagger-ui]==2.14.2
+flask<3.0.0
 flask-cors>=4.0.0
-werkzeug>=2.3.0
+werkzeug<3.0.0
 
 # Data handling
 requests>=2.31.0
@@ -27,4 +27,10 @@ typing-extensions>=4.7.0
 ujson>=5.8.0
 
 # Async support
-aiofiles>=23.1.0
+# Knowledge Graph & RAG
+langchain>=0.1.0,<0.2.0
+langchain-community>=0.0.30
+langchain-openai
+langchain-experimental
+neo4j>=5.12.0
+openai>=1.6.0

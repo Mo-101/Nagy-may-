@@ -14,14 +14,14 @@ class HabitatAnalysisRequestAnalysisParameters(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, vegetation_threshold: Object=None):  # noqa: E501
+    def __init__(self, vegetation_threshold: object=None):  # noqa: E501
         """HabitatAnalysisRequestAnalysisParameters - a model defined in Swagger
 
         :param vegetation_threshold: The vegetation_threshold of this HabitatAnalysisRequestAnalysisParameters.  # noqa: E501
-        :type vegetation_threshold: Object
+        :type vegetation_threshold: object
         """
         self.swagger_types = {
-            'vegetation_threshold': Object
+            'vegetation_threshold': object
         }
 
         self.attribute_map = {
@@ -41,22 +41,22 @@ class HabitatAnalysisRequestAnalysisParameters(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def vegetation_threshold(self) -> Object:
+    def vegetation_threshold(self) -> object:
         """Gets the vegetation_threshold of this HabitatAnalysisRequestAnalysisParameters.
 
 
         :return: The vegetation_threshold of this HabitatAnalysisRequestAnalysisParameters.
-        :rtype: Object
+        :rtype: object
         """
         return self._vegetation_threshold
 
     @vegetation_threshold.setter
-    def vegetation_threshold(self, vegetation_threshold: Object):
+    def vegetation_threshold(self, vegetation_threshold: object):
         """Sets the vegetation_threshold of this HabitatAnalysisRequestAnalysisParameters.
 
 
         :param vegetation_threshold: The vegetation_threshold of this HabitatAnalysisRequestAnalysisParameters.
-        :type vegetation_threshold: Object
+        :type vegetation_threshold: object
         """
 
         self._vegetation_threshold = vegetation_threshold

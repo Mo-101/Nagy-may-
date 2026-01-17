@@ -14,17 +14,17 @@ class SupabaseQueryResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, data: Object=None, metadata: Object=None):  # noqa: E501
+    def __init__(self, data: object=None, metadata: object=None):  # noqa: E501
         """SupabaseQueryResponse - a model defined in Swagger
 
         :param data: The data of this SupabaseQueryResponse.  # noqa: E501
-        :type data: Object
+        :type data: object
         :param metadata: The metadata of this SupabaseQueryResponse.  # noqa: E501
-        :type metadata: Object
+        :type metadata: object
         """
         self.swagger_types = {
-            'data': Object,
-            'metadata': Object
+            'data': object,
+            'metadata': object
         }
 
         self.attribute_map = {
@@ -46,47 +46,47 @@ class SupabaseQueryResponse(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def data(self) -> Object:
+    def data(self) -> object:
         """Gets the data of this SupabaseQueryResponse.
 
         Query results  # noqa: E501
 
         :return: The data of this SupabaseQueryResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._data
 
     @data.setter
-    def data(self, data: Object):
+    def data(self, data: object):
         """Sets the data of this SupabaseQueryResponse.
 
         Query results  # noqa: E501
 
         :param data: The data of this SupabaseQueryResponse.
-        :type data: Object
+        :type data: object
         """
 
         self._data = data
 
     @property
-    def metadata(self) -> Object:
+    def metadata(self) -> object:
         """Gets the metadata of this SupabaseQueryResponse.
 
         Query execution metadata  # noqa: E501
 
         :return: The metadata of this SupabaseQueryResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._metadata
 
     @metadata.setter
-    def metadata(self, metadata: Object):
+    def metadata(self, metadata: object):
         """Sets the metadata of this SupabaseQueryResponse.
 
         Query execution metadata  # noqa: E501
 
         :param metadata: The metadata of this SupabaseQueryResponse.
-        :type metadata: Object
+        :type metadata: object
         """
 
         self._metadata = metadata

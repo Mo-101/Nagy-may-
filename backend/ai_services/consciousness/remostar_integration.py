@@ -11,6 +11,7 @@ from typing import Dict, List, Optional, Tuple
 from datetime import datetime, timedelta
 from enum import Enum
 import logging
+from grid_manager import grid_manager
 
 logger = logging.getLogger(__name__)
 
@@ -184,6 +185,13 @@ class RemostarEngine:
             }
             
             logger.info(f"[REMOSTAR] Consciousness analysis: {odu_pattern}, Risk: {consciousness_analysis['risk_assessment']['level']}")
+            
+            # --- PERSISTENCE LAYER ---
+            try:
+                grid_manager.persist_detection(detection_data, consciousness_analysis)
+            except Exception as e:
+                logger.error(f"[REMOSTAR] Persistence failed: {e}")
+                
             return consciousness_analysis
             
         except Exception as e:

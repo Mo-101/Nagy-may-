@@ -14,17 +14,17 @@ class AnomalyDetectionRequest(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, input_file: Object=None, detection_method: Object=None):  # noqa: E501
+    def __init__(self, input_file: object=None, detection_method: object=None):  # noqa: E501
         """AnomalyDetectionRequest - a model defined in Swagger
 
         :param input_file: The input_file of this AnomalyDetectionRequest.  # noqa: E501
-        :type input_file: Object
+        :type input_file: object
         :param detection_method: The detection_method of this AnomalyDetectionRequest.  # noqa: E501
-        :type detection_method: Object
+        :type detection_method: object
         """
         self.swagger_types = {
-            'input_file': Object,
-            'detection_method': Object
+            'input_file': object,
+            'detection_method': object
         }
 
         self.attribute_map = {
@@ -46,43 +46,43 @@ class AnomalyDetectionRequest(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def input_file(self) -> Object:
+    def input_file(self) -> object:
         """Gets the input_file of this AnomalyDetectionRequest.
 
 
         :return: The input_file of this AnomalyDetectionRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._input_file
 
     @input_file.setter
-    def input_file(self, input_file: Object):
+    def input_file(self, input_file: object):
         """Sets the input_file of this AnomalyDetectionRequest.
 
 
         :param input_file: The input_file of this AnomalyDetectionRequest.
-        :type input_file: Object
+        :type input_file: object
         """
 
         self._input_file = input_file
 
     @property
-    def detection_method(self) -> Object:
+    def detection_method(self) -> object:
         """Gets the detection_method of this AnomalyDetectionRequest.
 
 
         :return: The detection_method of this AnomalyDetectionRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._detection_method
 
     @detection_method.setter
-    def detection_method(self, detection_method: Object):
+    def detection_method(self, detection_method: object):
         """Sets the detection_method of this AnomalyDetectionRequest.
 
 
         :param detection_method: The detection_method of this AnomalyDetectionRequest.
-        :type detection_method: Object
+        :type detection_method: object
         """
 
         self._detection_method = detection_method

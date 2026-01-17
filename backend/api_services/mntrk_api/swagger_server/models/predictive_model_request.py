@@ -15,20 +15,20 @@ class PredictiveModelRequest(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, model_type: Object=None, input_features: HabitatAnalysisRequestEnvironmentalData=None, output_type: Object=None):  # noqa: E501
+    def __init__(self, model_type: object=None, input_features: HabitatAnalysisRequestEnvironmentalData=None, output_type: object=None):  # noqa: E501
         """PredictiveModelRequest - a model defined in Swagger
 
         :param model_type: The model_type of this PredictiveModelRequest.  # noqa: E501
-        :type model_type: Object
+        :type model_type: object
         :param input_features: The input_features of this PredictiveModelRequest.  # noqa: E501
         :type input_features: HabitatAnalysisRequestEnvironmentalData
         :param output_type: The output_type of this PredictiveModelRequest.  # noqa: E501
-        :type output_type: Object
+        :type output_type: object
         """
         self.swagger_types = {
-            'model_type': Object,
+            'model_type': object,
             'input_features': HabitatAnalysisRequestEnvironmentalData,
-            'output_type': Object
+            'output_type': object
         }
 
         self.attribute_map = {
@@ -52,24 +52,24 @@ class PredictiveModelRequest(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def model_type(self) -> Object:
+    def model_type(self) -> object:
         """Gets the model_type of this PredictiveModelRequest.
 
         The predictive model to use  # noqa: E501
 
         :return: The model_type of this PredictiveModelRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._model_type
 
     @model_type.setter
-    def model_type(self, model_type: Object):
+    def model_type(self, model_type: object):
         """Sets the model_type of this PredictiveModelRequest.
 
         The predictive model to use  # noqa: E501
 
         :param model_type: The model_type of this PredictiveModelRequest.
-        :type model_type: Object
+        :type model_type: object
         """
 
         self._model_type = model_type
@@ -96,24 +96,24 @@ class PredictiveModelRequest(Model):
         self._input_features = input_features
 
     @property
-    def output_type(self) -> Object:
+    def output_type(self) -> object:
         """Gets the output_type of this PredictiveModelRequest.
 
         Type of prediction output  # noqa: E501
 
         :return: The output_type of this PredictiveModelRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._output_type
 
     @output_type.setter
-    def output_type(self, output_type: Object):
+    def output_type(self, output_type: object):
         """Sets the output_type of this PredictiveModelRequest.
 
         Type of prediction output  # noqa: E501
 
         :param output_type: The output_type of this PredictiveModelRequest.
-        :type output_type: Object
+        :type output_type: object
         """
 
         self._output_type = output_type

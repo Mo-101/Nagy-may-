@@ -14,17 +14,17 @@ class LangChainRequest(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, prompt: Object=None, options: Object=None):  # noqa: E501
+    def __init__(self, prompt: object=None, options: object=None):  # noqa: E501
         """LangChainRequest - a model defined in Swagger
 
         :param prompt: The prompt of this LangChainRequest.  # noqa: E501
-        :type prompt: Object
+        :type prompt: object
         :param options: The options of this LangChainRequest.  # noqa: E501
-        :type options: Object
+        :type options: object
         """
         self.swagger_types = {
-            'prompt': Object,
-            'options': Object
+            'prompt': object,
+            'options': object
         }
 
         self.attribute_map = {
@@ -46,47 +46,47 @@ class LangChainRequest(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def prompt(self) -> Object:
+    def prompt(self) -> object:
         """Gets the prompt of this LangChainRequest.
 
         Input prompt for LangChain  # noqa: E501
 
         :return: The prompt of this LangChainRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._prompt
 
     @prompt.setter
-    def prompt(self, prompt: Object):
+    def prompt(self, prompt: object):
         """Sets the prompt of this LangChainRequest.
 
         Input prompt for LangChain  # noqa: E501
 
         :param prompt: The prompt of this LangChainRequest.
-        :type prompt: Object
+        :type prompt: object
         """
 
         self._prompt = prompt
 
     @property
-    def options(self) -> Object:
+    def options(self) -> object:
         """Gets the options of this LangChainRequest.
 
         Additional options for generating insights  # noqa: E501
 
         :return: The options of this LangChainRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._options
 
     @options.setter
-    def options(self, options: Object):
+    def options(self, options: object):
         """Sets the options of this LangChainRequest.
 
         Additional options for generating insights  # noqa: E501
 
         :param options: The options of this LangChainRequest.
-        :type options: Object
+        :type options: object
         """
 
         self._options = options

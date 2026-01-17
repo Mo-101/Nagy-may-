@@ -14,14 +14,14 @@ class AdaptiveLearningRequest(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, model_type: Object=None):  # noqa: E501
+    def __init__(self, model_type: object=None):  # noqa: E501
         """AdaptiveLearningRequest - a model defined in Swagger
 
         :param model_type: The model_type of this AdaptiveLearningRequest.  # noqa: E501
-        :type model_type: Object
+        :type model_type: object
         """
         self.swagger_types = {
-            'model_type': Object
+            'model_type': object
         }
 
         self.attribute_map = {
@@ -41,22 +41,22 @@ class AdaptiveLearningRequest(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def model_type(self) -> Object:
+    def model_type(self) -> object:
         """Gets the model_type of this AdaptiveLearningRequest.
 
 
         :return: The model_type of this AdaptiveLearningRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._model_type
 
     @model_type.setter
-    def model_type(self, model_type: Object):
+    def model_type(self, model_type: object):
         """Sets the model_type of this AdaptiveLearningRequest.
 
 
         :param model_type: The model_type of this AdaptiveLearningRequest.
-        :type model_type: Object
+        :type model_type: object
         """
 
         self._model_type = model_type

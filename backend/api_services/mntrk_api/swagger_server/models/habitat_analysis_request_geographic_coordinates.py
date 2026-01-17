@@ -14,17 +14,17 @@ class HabitatAnalysisRequestGeographicCoordinates(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, latitude: Object=None, longitude: Object=None):  # noqa: E501
+    def __init__(self, latitude: object=None, longitude: object=None):  # noqa: E501
         """HabitatAnalysisRequestGeographicCoordinates - a model defined in Swagger
 
         :param latitude: The latitude of this HabitatAnalysisRequestGeographicCoordinates.  # noqa: E501
-        :type latitude: Object
+        :type latitude: object
         :param longitude: The longitude of this HabitatAnalysisRequestGeographicCoordinates.  # noqa: E501
-        :type longitude: Object
+        :type longitude: object
         """
         self.swagger_types = {
-            'latitude': Object,
-            'longitude': Object
+            'latitude': object,
+            'longitude': object
         }
 
         self.attribute_map = {
@@ -46,43 +46,43 @@ class HabitatAnalysisRequestGeographicCoordinates(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def latitude(self) -> Object:
+    def latitude(self) -> object:
         """Gets the latitude of this HabitatAnalysisRequestGeographicCoordinates.
 
 
         :return: The latitude of this HabitatAnalysisRequestGeographicCoordinates.
-        :rtype: Object
+        :rtype: object
         """
         return self._latitude
 
     @latitude.setter
-    def latitude(self, latitude: Object):
+    def latitude(self, latitude: object):
         """Sets the latitude of this HabitatAnalysisRequestGeographicCoordinates.
 
 
         :param latitude: The latitude of this HabitatAnalysisRequestGeographicCoordinates.
-        :type latitude: Object
+        :type latitude: object
         """
 
         self._latitude = latitude
 
     @property
-    def longitude(self) -> Object:
+    def longitude(self) -> object:
         """Gets the longitude of this HabitatAnalysisRequestGeographicCoordinates.
 
 
         :return: The longitude of this HabitatAnalysisRequestGeographicCoordinates.
-        :rtype: Object
+        :rtype: object
         """
         return self._longitude
 
     @longitude.setter
-    def longitude(self, longitude: Object):
+    def longitude(self, longitude: object):
         """Sets the longitude of this HabitatAnalysisRequestGeographicCoordinates.
 
 
         :param longitude: The longitude of this HabitatAnalysisRequestGeographicCoordinates.
-        :type longitude: Object
+        :type longitude: object
         """
 
         self._longitude = longitude

@@ -14,14 +14,14 @@ class MovementPredictionResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, predictions: Object=None):  # noqa: E501
+    def __init__(self, predictions: object=None):  # noqa: E501
         """MovementPredictionResponse - a model defined in Swagger
 
         :param predictions: The predictions of this MovementPredictionResponse.  # noqa: E501
-        :type predictions: Object
+        :type predictions: object
         """
         self.swagger_types = {
-            'predictions': Object
+            'predictions': object
         }
 
         self.attribute_map = {
@@ -41,22 +41,22 @@ class MovementPredictionResponse(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def predictions(self) -> Object:
+    def predictions(self) -> object:
         """Gets the predictions of this MovementPredictionResponse.
 
 
         :return: The predictions of this MovementPredictionResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._predictions
 
     @predictions.setter
-    def predictions(self, predictions: Object):
+    def predictions(self, predictions: object):
         """Sets the predictions of this MovementPredictionResponse.
 
 
         :param predictions: The predictions of this MovementPredictionResponse.
-        :type predictions: Object
+        :type predictions: object
         """
 
         self._predictions = predictions

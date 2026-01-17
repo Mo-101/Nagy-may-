@@ -14,17 +14,17 @@ class SupabaseQueryRequest(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, query: Object=None, parameters: Object=None):  # noqa: E501
+    def __init__(self, query: object=None, parameters: object=None):  # noqa: E501
         """SupabaseQueryRequest - a model defined in Swagger
 
         :param query: The query of this SupabaseQueryRequest.  # noqa: E501
-        :type query: Object
+        :type query: object
         :param parameters: The parameters of this SupabaseQueryRequest.  # noqa: E501
-        :type parameters: Object
+        :type parameters: object
         """
         self.swagger_types = {
-            'query': Object,
-            'parameters': Object
+            'query': object,
+            'parameters': object
         }
 
         self.attribute_map = {
@@ -46,47 +46,47 @@ class SupabaseQueryRequest(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def query(self) -> Object:
+    def query(self) -> object:
         """Gets the query of this SupabaseQueryRequest.
 
         SQL query to execute on Supabase  # noqa: E501
 
         :return: The query of this SupabaseQueryRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._query
 
     @query.setter
-    def query(self, query: Object):
+    def query(self, query: object):
         """Sets the query of this SupabaseQueryRequest.
 
         SQL query to execute on Supabase  # noqa: E501
 
         :param query: The query of this SupabaseQueryRequest.
-        :type query: Object
+        :type query: object
         """
 
         self._query = query
 
     @property
-    def parameters(self) -> Object:
+    def parameters(self) -> object:
         """Gets the parameters of this SupabaseQueryRequest.
 
         Parameters for the SQL query  # noqa: E501
 
         :return: The parameters of this SupabaseQueryRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._parameters
 
     @parameters.setter
-    def parameters(self, parameters: Object):
+    def parameters(self, parameters: object):
         """Sets the parameters of this SupabaseQueryRequest.
 
         Parameters for the SQL query  # noqa: E501
 
         :param parameters: The parameters of this SupabaseQueryRequest.
-        :type parameters: Object
+        :type parameters: object
         """
 
         self._parameters = parameters

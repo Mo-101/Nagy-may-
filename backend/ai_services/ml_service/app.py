@@ -10,6 +10,7 @@ import asyncio
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 import json
+import sys
 
 import uvicorn
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
@@ -23,16 +24,26 @@ import io
 from ultralytics import YOLO
 import cv2
 
-# REMOSTAR consciousness integration (optional)
-try:
-    from remostar_consciousness_embedded import analyze_detection_consciousness
-    CONSCIOUSNESS_AVAILABLE = True
-except ImportError:
-    CONSCIOUSNESS_AVAILABLE = False
-
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
+
+# REMOSTAR consciousness integration (Shared Volume)
+try:
+    # Add shared volume paths to sys.path
+    if os.path.exists("/app/ai_services_shared"):
+        sys.path.append("/app/ai_services_shared")
+        sys.path.append("/app/ai_services_shared/consciousness")
+    
+    from remostar_integration import analyze_detection_consciousness
+    CONSCIOUSNESS_AVAILABLE = True
+    logger.info("[v2] Shared Remostar Consciousness Engine loaded successfully")
+except ImportError as e:
+    logger.warning(f"[v2] Shared Consciousness Engine not found: {e}")
+    CONSCIOUSNESS_AVAILABLE = False
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -50,8 +61,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Global model instance
-model = None
+# Global settings
 MODEL_PATH = os.getenv('YOLO_MODEL_PATH', '/app/models/weights/yolo11n.pt')
 CONFIDENCE_THRESHOLD = float(os.getenv('YOLO_CONFIDENCE_THRESHOLD', '0.5'))
 IOU_THRESHOLD = float(os.getenv('YOLO_IOU_THRESHOLD', '0.4'))
@@ -160,6 +170,7 @@ class MLDetectionService:
                     'device': DEVICE
                 },
                 'detections': detections,
+                'status_code': 200,
                 'detection_summary': {
                     'total_detections': len(detections),
                     'species_detected': list(set([d['species'] for d in detections])),
@@ -171,10 +182,17 @@ class MLDetectionService:
             # Enhanced consciousness analysis (if available and requested)
             if enhance_with_consciousness and CONSCIOUSNESS_AVAILABLE and detections:
                 try:
-                    consciousness_analysis = analyze_detection_consciousness({
+                    # Enrich detection data with location before analysis for better persistence
+                    analysis_context = {
                         'detections': detections,
                         'timestamp': ml_response['timestamp']
-                    })
+                    }
+                    if latitude is not None and longitude is not None:
+                        analysis_context['location'] = {'latitude': latitude, 'longitude': longitude}
+                    
+                    consciousness_analysis = analyze_detection_consciousness(
+                        detection_data=analysis_context
+                    )
                     ml_response['consciousness_enhancement'] = consciousness_analysis
                     ml_response['enhanced_by'] = 'remostar_consciousness'
                 except Exception as e:
@@ -390,10 +408,12 @@ async def mock_detection_for_testing(
     # Apply consciousness enhancement to mock data
     if CONSCIOUSNESS_AVAILABLE:
         try:
-            consciousness_analysis = analyze_detection_consciousness({
-                'detections': mock_detections,
-                'timestamp': mock_response['timestamp']
-            })
+            consciousness_analysis = analyze_detection_consciousness(
+                detection_data={
+                    'detections': mock_detections,
+                    'timestamp': mock_response['timestamp']
+                }
+            )
             mock_response['consciousness_enhancement'] = consciousness_analysis
             mock_response['enhanced_by'] = 'remostar_consciousness_mock'
         except Exception as e:

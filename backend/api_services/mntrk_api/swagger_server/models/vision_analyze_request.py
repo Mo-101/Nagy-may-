@@ -14,17 +14,17 @@ class VisionAnalyzeRequest(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, image: Object=None, confidence_threshold: Object=None):  # noqa: E501
+    def __init__(self, image: object=None, confidence_threshold: object=None):  # noqa: E501
         """VisionAnalyzeRequest - a model defined in Swagger
 
         :param image: The image of this VisionAnalyzeRequest.  # noqa: E501
-        :type image: Object
+        :type image: object
         :param confidence_threshold: The confidence_threshold of this VisionAnalyzeRequest.  # noqa: E501
-        :type confidence_threshold: Object
+        :type confidence_threshold: object
         """
         self.swagger_types = {
-            'image': Object,
-            'confidence_threshold': Object
+            'image': object,
+            'confidence_threshold': object
         }
 
         self.attribute_map = {
@@ -46,43 +46,43 @@ class VisionAnalyzeRequest(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def image(self) -> Object:
+    def image(self) -> object:
         """Gets the image of this VisionAnalyzeRequest.
 
 
         :return: The image of this VisionAnalyzeRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._image
 
     @image.setter
-    def image(self, image: Object):
+    def image(self, image: object):
         """Sets the image of this VisionAnalyzeRequest.
 
 
         :param image: The image of this VisionAnalyzeRequest.
-        :type image: Object
+        :type image: object
         """
 
         self._image = image
 
     @property
-    def confidence_threshold(self) -> Object:
+    def confidence_threshold(self) -> object:
         """Gets the confidence_threshold of this VisionAnalyzeRequest.
 
 
         :return: The confidence_threshold of this VisionAnalyzeRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._confidence_threshold
 
     @confidence_threshold.setter
-    def confidence_threshold(self, confidence_threshold: Object):
+    def confidence_threshold(self, confidence_threshold: object):
         """Sets the confidence_threshold of this VisionAnalyzeRequest.
 
 
         :param confidence_threshold: The confidence_threshold of this VisionAnalyzeRequest.
-        :type confidence_threshold: Object
+        :type confidence_threshold: object
         """
 
         self._confidence_threshold = confidence_threshold

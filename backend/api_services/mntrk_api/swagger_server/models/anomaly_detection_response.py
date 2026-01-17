@@ -14,17 +14,17 @@ class AnomalyDetectionResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, message: Object=None, anomaly_results_url: Object=None):  # noqa: E501
+    def __init__(self, message: object=None, anomaly_results_url: object=None):  # noqa: E501
         """AnomalyDetectionResponse - a model defined in Swagger
 
         :param message: The message of this AnomalyDetectionResponse.  # noqa: E501
-        :type message: Object
+        :type message: object
         :param anomaly_results_url: The anomaly_results_url of this AnomalyDetectionResponse.  # noqa: E501
-        :type anomaly_results_url: Object
+        :type anomaly_results_url: object
         """
         self.swagger_types = {
-            'message': Object,
-            'anomaly_results_url': Object
+            'message': object,
+            'anomaly_results_url': object
         }
 
         self.attribute_map = {
@@ -46,43 +46,43 @@ class AnomalyDetectionResponse(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def message(self) -> Object:
+    def message(self) -> object:
         """Gets the message of this AnomalyDetectionResponse.
 
 
         :return: The message of this AnomalyDetectionResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._message
 
     @message.setter
-    def message(self, message: Object):
+    def message(self, message: object):
         """Sets the message of this AnomalyDetectionResponse.
 
 
         :param message: The message of this AnomalyDetectionResponse.
-        :type message: Object
+        :type message: object
         """
 
         self._message = message
 
     @property
-    def anomaly_results_url(self) -> Object:
+    def anomaly_results_url(self) -> object:
         """Gets the anomaly_results_url of this AnomalyDetectionResponse.
 
 
         :return: The anomaly_results_url of this AnomalyDetectionResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._anomaly_results_url
 
     @anomaly_results_url.setter
-    def anomaly_results_url(self, anomaly_results_url: Object):
+    def anomaly_results_url(self, anomaly_results_url: object):
         """Sets the anomaly_results_url of this AnomalyDetectionResponse.
 
 
         :param anomaly_results_url: The anomaly_results_url of this AnomalyDetectionResponse.
-        :type anomaly_results_url: Object
+        :type anomaly_results_url: object
         """
 
         self._anomaly_results_url = anomaly_results_url

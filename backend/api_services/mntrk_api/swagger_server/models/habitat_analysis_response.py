@@ -15,20 +15,20 @@ class HabitatAnalysisResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, id: Object=None, location: HabitatAnalysisRequestGeographicCoordinates=None, suitability_score: Object=None):  # noqa: E501
+    def __init__(self, id: object=None, location: HabitatAnalysisRequestGeographicCoordinates=None, suitability_score: object=None):  # noqa: E501
         """HabitatAnalysisResponse - a model defined in Swagger
 
         :param id: The id of this HabitatAnalysisResponse.  # noqa: E501
-        :type id: Object
+        :type id: object
         :param location: The location of this HabitatAnalysisResponse.  # noqa: E501
         :type location: HabitatAnalysisRequestGeographicCoordinates
         :param suitability_score: The suitability_score of this HabitatAnalysisResponse.  # noqa: E501
-        :type suitability_score: Object
+        :type suitability_score: object
         """
         self.swagger_types = {
-            'id': Object,
+            'id': object,
             'location': HabitatAnalysisRequestGeographicCoordinates,
-            'suitability_score': Object
+            'suitability_score': object
         }
 
         self.attribute_map = {
@@ -52,22 +52,22 @@ class HabitatAnalysisResponse(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def id(self) -> Object:
+    def id(self) -> object:
         """Gets the id of this HabitatAnalysisResponse.
 
 
         :return: The id of this HabitatAnalysisResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._id
 
     @id.setter
-    def id(self, id: Object):
+    def id(self, id: object):
         """Sets the id of this HabitatAnalysisResponse.
 
 
         :param id: The id of this HabitatAnalysisResponse.
-        :type id: Object
+        :type id: object
         """
 
         self._id = id
@@ -94,22 +94,22 @@ class HabitatAnalysisResponse(Model):
         self._location = location
 
     @property
-    def suitability_score(self) -> Object:
+    def suitability_score(self) -> object:
         """Gets the suitability_score of this HabitatAnalysisResponse.
 
 
         :return: The suitability_score of this HabitatAnalysisResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._suitability_score
 
     @suitability_score.setter
-    def suitability_score(self, suitability_score: Object):
+    def suitability_score(self, suitability_score: object):
         """Sets the suitability_score of this HabitatAnalysisResponse.
 
 
         :param suitability_score: The suitability_score of this HabitatAnalysisResponse.
-        :type suitability_score: Object
+        :type suitability_score: object
         """
 
         self._suitability_score = suitability_score

@@ -14,17 +14,17 @@ class RemoteSensingAugmentationResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, message: Object=None, results_url: Object=None):  # noqa: E501
+    def __init__(self, message: object=None, results_url: object=None):  # noqa: E501
         """RemoteSensingAugmentationResponse - a model defined in Swagger
 
         :param message: The message of this RemoteSensingAugmentationResponse.  # noqa: E501
-        :type message: Object
+        :type message: object
         :param results_url: The results_url of this RemoteSensingAugmentationResponse.  # noqa: E501
-        :type results_url: Object
+        :type results_url: object
         """
         self.swagger_types = {
-            'message': Object,
-            'results_url': Object
+            'message': object,
+            'results_url': object
         }
 
         self.attribute_map = {
@@ -46,43 +46,43 @@ class RemoteSensingAugmentationResponse(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def message(self) -> Object:
+    def message(self) -> object:
         """Gets the message of this RemoteSensingAugmentationResponse.
 
 
         :return: The message of this RemoteSensingAugmentationResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._message
 
     @message.setter
-    def message(self, message: Object):
+    def message(self, message: object):
         """Sets the message of this RemoteSensingAugmentationResponse.
 
 
         :param message: The message of this RemoteSensingAugmentationResponse.
-        :type message: Object
+        :type message: object
         """
 
         self._message = message
 
     @property
-    def results_url(self) -> Object:
+    def results_url(self) -> object:
         """Gets the results_url of this RemoteSensingAugmentationResponse.
 
 
         :return: The results_url of this RemoteSensingAugmentationResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._results_url
 
     @results_url.setter
-    def results_url(self, results_url: Object):
+    def results_url(self, results_url: object):
         """Sets the results_url of this RemoteSensingAugmentationResponse.
 
 
         :param results_url: The results_url of this RemoteSensingAugmentationResponse.
-        :type results_url: Object
+        :type results_url: object
         """
 
         self._results_url = results_url

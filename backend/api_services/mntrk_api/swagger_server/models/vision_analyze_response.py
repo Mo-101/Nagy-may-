@@ -14,17 +14,17 @@ class VisionAnalyzeResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, status: Object=None, detections: Object=None):  # noqa: E501
+    def __init__(self, status: object=None, detections: object=None):  # noqa: E501
         """VisionAnalyzeResponse - a model defined in Swagger
 
         :param status: The status of this VisionAnalyzeResponse.  # noqa: E501
-        :type status: Object
+        :type status: object
         :param detections: The detections of this VisionAnalyzeResponse.  # noqa: E501
-        :type detections: Object
+        :type detections: object
         """
         self.swagger_types = {
-            'status': Object,
-            'detections': Object
+            'status': object,
+            'detections': object
         }
 
         self.attribute_map = {
@@ -46,43 +46,43 @@ class VisionAnalyzeResponse(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def status(self) -> Object:
+    def status(self) -> object:
         """Gets the status of this VisionAnalyzeResponse.
 
 
         :return: The status of this VisionAnalyzeResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._status
 
     @status.setter
-    def status(self, status: Object):
+    def status(self, status: object):
         """Sets the status of this VisionAnalyzeResponse.
 
 
         :param status: The status of this VisionAnalyzeResponse.
-        :type status: Object
+        :type status: object
         """
 
         self._status = status
 
     @property
-    def detections(self) -> Object:
+    def detections(self) -> object:
         """Gets the detections of this VisionAnalyzeResponse.
 
 
         :return: The detections of this VisionAnalyzeResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._detections
 
     @detections.setter
-    def detections(self, detections: Object):
+    def detections(self, detections: object):
         """Sets the detections of this VisionAnalyzeResponse.
 
 
         :param detections: The detections of this VisionAnalyzeResponse.
-        :type detections: Object
+        :type detections: object
         """
 
         self._detections = detections

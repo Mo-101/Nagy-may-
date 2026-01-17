@@ -14,17 +14,17 @@ class GoogleVisionRequest(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, image: Object=None, features: Object=None):  # noqa: E501
+    def __init__(self, image: object=None, features: object=None):  # noqa: E501
         """GoogleVisionRequest - a model defined in Swagger
 
         :param image: The image of this GoogleVisionRequest.  # noqa: E501
-        :type image: Object
+        :type image: object
         :param features: The features of this GoogleVisionRequest.  # noqa: E501
-        :type features: Object
+        :type features: object
         """
         self.swagger_types = {
-            'image': Object,
-            'features': Object
+            'image': object,
+            'features': object
         }
 
         self.attribute_map = {
@@ -46,47 +46,47 @@ class GoogleVisionRequest(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def image(self) -> Object:
+    def image(self) -> object:
         """Gets the image of this GoogleVisionRequest.
 
         Base64-encoded image data  # noqa: E501
 
         :return: The image of this GoogleVisionRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._image
 
     @image.setter
-    def image(self, image: Object):
+    def image(self, image: object):
         """Sets the image of this GoogleVisionRequest.
 
         Base64-encoded image data  # noqa: E501
 
         :param image: The image of this GoogleVisionRequest.
-        :type image: Object
+        :type image: object
         """
 
         self._image = image
 
     @property
-    def features(self) -> Object:
+    def features(self) -> object:
         """Gets the features of this GoogleVisionRequest.
 
         Google Vision features to analyze (e.g., LABEL_DETECTION)  # noqa: E501
 
         :return: The features of this GoogleVisionRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._features
 
     @features.setter
-    def features(self, features: Object):
+    def features(self, features: object):
         """Sets the features of this GoogleVisionRequest.
 
         Google Vision features to analyze (e.g., LABEL_DETECTION)  # noqa: E501
 
         :param features: The features of this GoogleVisionRequest.
-        :type features: Object
+        :type features: object
         """
 
         self._features = features

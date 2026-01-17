@@ -17,11 +17,11 @@ class HabitatAnalysisRequest(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, satellite_data: Object=None, environmental_data: HabitatAnalysisRequestEnvironmentalData=None, geographic_coordinates: HabitatAnalysisRequestGeographicCoordinates=None, analysis_parameters: HabitatAnalysisRequestAnalysisParameters=None):  # noqa: E501
+    def __init__(self, satellite_data: object=None, environmental_data: HabitatAnalysisRequestEnvironmentalData=None, geographic_coordinates: HabitatAnalysisRequestGeographicCoordinates=None, analysis_parameters: HabitatAnalysisRequestAnalysisParameters=None):  # noqa: E501
         """HabitatAnalysisRequest - a model defined in Swagger
 
         :param satellite_data: The satellite_data of this HabitatAnalysisRequest.  # noqa: E501
-        :type satellite_data: Object
+        :type satellite_data: object
         :param environmental_data: The environmental_data of this HabitatAnalysisRequest.  # noqa: E501
         :type environmental_data: HabitatAnalysisRequestEnvironmentalData
         :param geographic_coordinates: The geographic_coordinates of this HabitatAnalysisRequest.  # noqa: E501
@@ -30,7 +30,7 @@ class HabitatAnalysisRequest(Model):
         :type analysis_parameters: HabitatAnalysisRequestAnalysisParameters
         """
         self.swagger_types = {
-            'satellite_data': Object,
+            'satellite_data': object,
             'environmental_data': HabitatAnalysisRequestEnvironmentalData,
             'geographic_coordinates': HabitatAnalysisRequestGeographicCoordinates,
             'analysis_parameters': HabitatAnalysisRequestAnalysisParameters
@@ -59,24 +59,24 @@ class HabitatAnalysisRequest(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def satellite_data(self) -> Object:
+    def satellite_data(self) -> object:
         """Gets the satellite_data of this HabitatAnalysisRequest.
 
         Base64 encoded satellite image  # noqa: E501
 
         :return: The satellite_data of this HabitatAnalysisRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._satellite_data
 
     @satellite_data.setter
-    def satellite_data(self, satellite_data: Object):
+    def satellite_data(self, satellite_data: object):
         """Sets the satellite_data of this HabitatAnalysisRequest.
 
         Base64 encoded satellite image  # noqa: E501
 
         :param satellite_data: The satellite_data of this HabitatAnalysisRequest.
-        :type satellite_data: Object
+        :type satellite_data: object
         """
 
         self._satellite_data = satellite_data

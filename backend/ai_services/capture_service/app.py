@@ -22,6 +22,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+MOCK_MODE = os.getenv("MOCK_MODE", "true").lower() == "true"
+logger.info(f"[SKYHAWK] Mock Mode: {MOCK_MODE}")
+
 class SkyhawkCaptureService:
     """Main service orchestrating RTSP capture → inference → database"""
     

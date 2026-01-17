@@ -7,12 +7,13 @@ import os
 import asyncio
 import logging
 from datetime import datetime
-from typing import Dict, Optional
+from typing import Dict, Optional, List
 import json
 import httpx
 from PIL import Image
 import cv2
 import numpy as np
+import io
 from ultralytics import YOLO
 
 # Configure logging
@@ -27,7 +28,8 @@ class DualDetectionOrchestrator:
     
     def __init__(self):
         self.ml_service_url = os.getenv('YOLO_API_URL', 'http://ml-service:5001')
-        self.local_model_path = os.getenv('YOLO_MODEL_PATH', './yolo11n.pt')
+        # Point to a local model file for edge inference
+        self.local_model_path = os.getenv('YOLO_MODEL_PATH', '/app/models/weights/yolo11n.pt')
         self.http_client = httpx.AsyncClient(timeout=30.0)
         self.local_model = None
         self.local_model_loaded = False
@@ -38,9 +40,13 @@ class DualDetectionOrchestrator:
             if os.path.exists(self.local_model_path):
                 self.local_model = YOLO(self.local_model_path)
                 self.local_model_loaded = True
-                logger.info("Local YOLO11n model loaded in capture service")
+                logger.info(f"Local YOLO11n model loaded in capture service from {self.local_model_path}")
             else:
-                logger.warning(f"Local model not found at {self.local_model_path}")
+                logger.warning(f"Local model not found at {self.local_model_path}, looking for backup...")
+                # Search common locations or use a default if it exists
+                if os.path.exists('yolov8n.pt'):
+                    self.local_model = YOLO('yolov8n.pt')
+                    self.local_model_loaded = True
         except Exception as e:
             logger.error(f"Failed to load local model: {e}")
     
@@ -150,7 +156,7 @@ class DualDetectionOrchestrator:
                     class_id = int(box.cls[0])
                     bbox = box.xyxy[0].tolist()
                     
-                    # Simple species mapping (could be enhanced)
+                    # Simple species mapping
                     species = 'Mastomys_natalensis' if class_id == 0 else 'Other_rodent'
                     
                     detection = {
@@ -387,28 +393,3 @@ class MockDetectionGenerator:
                 'high_risk_detections': 2
             }
         }
-
-# Testing endpoints for consciousness layers
-async def test_consciousness_with_mock_data():
-    """Test consciousness layers with realistic mock detection data"""
-    
-    # Test 1: Single high-confidence M. natalensis
-    print("=== Testing Single High-Risk Detection ===")
-    mock_detection_1 = MockDetectionGenerator.generate_mastomys_detection(confidence=0.95)
-    print(json.dumps(mock_detection_1, indent=2))
-    
-    # Test 2: Multiple M. natalensis (outbreak scenario)
-    print("\n=== Testing Multiple High-Risk Detection ===")
-    mock_detection_2 = MockDetectionGenerator.generate_mastomys_detection(confidence=0.87, count=3)
-    print(json.dumps(mock_detection_2, indent=2))
-    
-    # Test 3: Multi-species complex scenario
-    print("\n=== Testing Multi-Species Complex Detection ===")
-    mock_detection_3 = MockDetectionGenerator.generate_multi_species_detection()
-    print(json.dumps(mock_detection_3, indent=2))
-    
-    return [mock_detection_1, mock_detection_2, mock_detection_3]
-
-if __name__ == "__main__":
-    # Run mock testing
-    asyncio.run(test_consciousness_with_mock_data())

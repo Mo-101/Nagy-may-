@@ -14,17 +14,17 @@ class PredictiveModelResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, status: Object=None, predictions: Object=None):  # noqa: E501
+    def __init__(self, status: object=None, predictions: object=None):  # noqa: E501
         """PredictiveModelResponse - a model defined in Swagger
 
         :param status: The status of this PredictiveModelResponse.  # noqa: E501
-        :type status: Object
+        :type status: object
         :param predictions: The predictions of this PredictiveModelResponse.  # noqa: E501
-        :type predictions: Object
+        :type predictions: object
         """
         self.swagger_types = {
-            'status': Object,
-            'predictions': Object
+            'status': object,
+            'predictions': object
         }
 
         self.attribute_map = {
@@ -46,43 +46,43 @@ class PredictiveModelResponse(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def status(self) -> Object:
+    def status(self) -> object:
         """Gets the status of this PredictiveModelResponse.
 
 
         :return: The status of this PredictiveModelResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._status
 
     @status.setter
-    def status(self, status: Object):
+    def status(self, status: object):
         """Sets the status of this PredictiveModelResponse.
 
 
         :param status: The status of this PredictiveModelResponse.
-        :type status: Object
+        :type status: object
         """
 
         self._status = status
 
     @property
-    def predictions(self) -> Object:
+    def predictions(self) -> object:
         """Gets the predictions of this PredictiveModelResponse.
 
 
         :return: The predictions of this PredictiveModelResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._predictions
 
     @predictions.setter
-    def predictions(self, predictions: Object):
+    def predictions(self, predictions: object):
         """Sets the predictions of this PredictiveModelResponse.
 
 
         :param predictions: The predictions of this PredictiveModelResponse.
-        :type predictions: Object
+        :type predictions: object
         """
 
         self._predictions = predictions

@@ -14,17 +14,17 @@ class RemoteSensingAugmentationRequest(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, dataset_url: Object=None, augmentation_type: Object=None):  # noqa: E501
+    def __init__(self, dataset_url: object=None, augmentation_type: object=None):  # noqa: E501
         """RemoteSensingAugmentationRequest - a model defined in Swagger
 
         :param dataset_url: The dataset_url of this RemoteSensingAugmentationRequest.  # noqa: E501
-        :type dataset_url: Object
+        :type dataset_url: object
         :param augmentation_type: The augmentation_type of this RemoteSensingAugmentationRequest.  # noqa: E501
-        :type augmentation_type: Object
+        :type augmentation_type: object
         """
         self.swagger_types = {
-            'dataset_url': Object,
-            'augmentation_type': Object
+            'dataset_url': object,
+            'augmentation_type': object
         }
 
         self.attribute_map = {
@@ -46,43 +46,43 @@ class RemoteSensingAugmentationRequest(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def dataset_url(self) -> Object:
+    def dataset_url(self) -> object:
         """Gets the dataset_url of this RemoteSensingAugmentationRequest.
 
 
         :return: The dataset_url of this RemoteSensingAugmentationRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._dataset_url
 
     @dataset_url.setter
-    def dataset_url(self, dataset_url: Object):
+    def dataset_url(self, dataset_url: object):
         """Sets the dataset_url of this RemoteSensingAugmentationRequest.
 
 
         :param dataset_url: The dataset_url of this RemoteSensingAugmentationRequest.
-        :type dataset_url: Object
+        :type dataset_url: object
         """
 
         self._dataset_url = dataset_url
 
     @property
-    def augmentation_type(self) -> Object:
+    def augmentation_type(self) -> object:
         """Gets the augmentation_type of this RemoteSensingAugmentationRequest.
 
 
         :return: The augmentation_type of this RemoteSensingAugmentationRequest.
-        :rtype: Object
+        :rtype: object
         """
         return self._augmentation_type
 
     @augmentation_type.setter
-    def augmentation_type(self, augmentation_type: Object):
+    def augmentation_type(self, augmentation_type: object):
         """Sets the augmentation_type of this RemoteSensingAugmentationRequest.
 
 
         :param augmentation_type: The augmentation_type of this RemoteSensingAugmentationRequest.
-        :type augmentation_type: Object
+        :type augmentation_type: object
         """
 
         self._augmentation_type = augmentation_type

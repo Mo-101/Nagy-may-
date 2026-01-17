@@ -14,20 +14,20 @@ class GoogleVisionResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, labels: Object=None, objects: Object=None, text: Object=None):  # noqa: E501
+    def __init__(self, labels: object=None, objects: object=None, text: object=None):  # noqa: E501
         """GoogleVisionResponse - a model defined in Swagger
 
         :param labels: The labels of this GoogleVisionResponse.  # noqa: E501
-        :type labels: Object
+        :type labels: object
         :param objects: The objects of this GoogleVisionResponse.  # noqa: E501
-        :type objects: Object
+        :type objects: object
         :param text: The text of this GoogleVisionResponse.  # noqa: E501
-        :type text: Object
+        :type text: object
         """
         self.swagger_types = {
-            'labels': Object,
-            'objects': Object,
-            'text': Object
+            'labels': object,
+            'objects': object,
+            'text': object
         }
 
         self.attribute_map = {
@@ -51,68 +51,68 @@ class GoogleVisionResponse(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def labels(self) -> Object:
+    def labels(self) -> object:
         """Gets the labels of this GoogleVisionResponse.
 
         Detected labels  # noqa: E501
 
         :return: The labels of this GoogleVisionResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._labels
 
     @labels.setter
-    def labels(self, labels: Object):
+    def labels(self, labels: object):
         """Sets the labels of this GoogleVisionResponse.
 
         Detected labels  # noqa: E501
 
         :param labels: The labels of this GoogleVisionResponse.
-        :type labels: Object
+        :type labels: object
         """
 
         self._labels = labels
 
     @property
-    def objects(self) -> Object:
+    def objects(self) -> object:
         """Gets the objects of this GoogleVisionResponse.
 
 
         :return: The objects of this GoogleVisionResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._objects
 
     @objects.setter
-    def objects(self, objects: Object):
+    def objects(self, objects: object):
         """Sets the objects of this GoogleVisionResponse.
 
 
         :param objects: The objects of this GoogleVisionResponse.
-        :type objects: Object
+        :type objects: object
         """
 
         self._objects = objects
 
     @property
-    def text(self) -> Object:
+    def text(self) -> object:
         """Gets the text of this GoogleVisionResponse.
 
         Detected text  # noqa: E501
 
         :return: The text of this GoogleVisionResponse.
-        :rtype: Object
+        :rtype: object
         """
         return self._text
 
     @text.setter
-    def text(self, text: Object):
+    def text(self, text: object):
         """Sets the text of this GoogleVisionResponse.
 
         Detected text  # noqa: E501
 
         :param text: The text of this GoogleVisionResponse.
-        :type text: Object
+        :type text: object
         """
 
         self._text = text
