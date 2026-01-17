@@ -224,15 +224,25 @@ def handle_rag_query(body=None):  # noqa: E501
     if connexion.request.is_json:
         body = connexion.request.get_json()
     
-    question = body.get("question", body.get("prompt", ""))
+    # Check for prompt or query or question
+    question = body.get("question", body.get("prompt", body.get("query", "")))
     
     try:
         # Initialize Mostar Grid RAG chain
-        graph = Neo4jGraph(
-            url=os.getenv("NEO4J_URI", "bolt://skyhawk_graph:7687"),
-            username=os.getenv("NEO4J_USER", "neo4j"),
-            password=os.getenv("NEO4J_PASSWORD", "mostar123")
-        )
+        # Use host.docker.internal by default for docker-hosted API reaching host Neo4j
+        neo4j_uri = os.getenv("NEO4J_URI", "bolt://host.docker.internal:7687")
+        
+        # Try to initialize graph without requiring APOC
+        try:
+            graph = Neo4jGraph(
+                url=neo4j_uri,
+                username=os.getenv("NEO4J_USER", "neo4j"),
+                password=os.getenv("NEO4J_PASSWORD", "mostar123"),
+                refresh_schema=False # Don't auto-refresh schema if APOC might be missing
+            )
+        except Exception as e:
+            logger.warning(f"[CORE API] Neo4jGraph init failed, attempting direct LLM fallback: {e}")
+            return _handle_llm_fallback(question)
         
         # Use DCX0 (Ollama) as the LLM
         llm = ChatOpenAI(
@@ -241,24 +251,49 @@ def handle_rag_query(body=None):  # noqa: E501
             model_name="Mostar/mostar-ai:dcx2" # Correct model from Ollama
         )
         
-        chain = GraphCypherQAChain.from_llm(
-            llm=llm,
-            graph=graph,
-            verbose=True,
-            allow_dangerous_requests=True
-        )
-        
-        logger.info(f"[CORE API] Running RAG query: {question}")
-        response = chain.run(question)
+        try:
+            chain = GraphCypherQAChain.from_llm(
+                llm=llm,
+                graph=graph,
+                verbose=True,
+                allow_dangerous_requests=True
+            )
+            logger.info(f"[CORE API] Running RAG query: {question}")
+            response = chain.run(question)
+        except Exception as e:
+            if "APOC" in str(e):
+                logger.warning("[CORE API] APOC missing, falling back to basic LLM reasoning")
+                return _handle_llm_fallback(question)
+            raise e
         
         return {
             "question": question,
             "answer": response,
+            "response": response, # Duplicate for frontend compatibility
             "source": "Mostar Grid Knowledge Graph"
         }
     except Exception as e:
         logger.error(f"[CORE API] RAG query failed: {e}")
-        return {"error": f"RAG query failed: {str(e)}"}, 500
+        return _handle_llm_fallback(question)
+
+def _handle_llm_fallback(question):
+    """Fallback when Graph RAG fails"""
+    try:
+        llm = ChatOpenAI(
+            openai_api_base=os.getenv("DCX0_ENDPOINT", "http://host.docker.internal:11434") + "/v1",
+            openai_api_key="none",
+            model_name="Mostar/mostar-ai:dcx2"
+        )
+        prompt = f"As REMOSTAR, an African-sovereign AI for Lassa fever surveillance, answer this query: {question}. Note: Access to real-time graph is currently limited, answer based on your internal knowledge and project context (Mostar Grid, Mastomys monitoring, West African health)."
+        response = llm.invoke(prompt).content
+        return {
+            "question": question,
+            "answer": response,
+            "response": response,
+            "source": "REMOSTAR Internal Logic"
+        }
+    except Exception as e:
+        return {"error": f"Internal AI fallback failed: {str(e)}"}, 500
 
 
 def integrate_google_vision(body):  # noqa: E501

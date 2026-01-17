@@ -23,6 +23,7 @@ class GridManager:
         self.neo4j_uri = os.getenv("NEO4J_URI", "bolt://skyhawk_graph:7687")
         self.neo4j_user = os.getenv("NEO4J_USER", "neo4j")
         self.neo4j_password = os.getenv("NEO4J_PASSWORD", "mostar123")
+        self.neo4j_db = os.getenv("NEO4J_DB", "neo4j") # Default to standard neo4j DB
         self.neo4j_driver = None
         
         # Supabase Config
@@ -67,20 +68,34 @@ class GridManager:
             return
 
         try:
+            location = detection_data.get("location", {})
+            lat = location.get("latitude", 0.0)
+            lon = location.get("longitude", 0.0)
+            
+            # Align with frontend table and schema
             payload = {
-                "timestamp": analysis.get("timestamp", datetime.utcnow().isoformat()),
-                "location": detection_data.get("location"),
-                "detections": detection_data.get("detections"),
-                "risk_score": analysis.get("risk_assessment", {}).get("score"),
-                "risk_level": analysis.get("risk_assessment", {}).get("level"),
-                "odu_pattern": analysis.get("odu_pattern"),
-                "consciousness_state": analysis.get("consciousness_metrics", {}).get("consciousness_state"),
-                "full_analysis": analysis
+                "latitude": lat,
+                "longitude": lon,
+                "detection_timestamp": analysis.get("timestamp", datetime.utcnow().isoformat()),
+                "detection_count": len(detection_data.get("detections", [])),
+                "source": detection_data.get("source", "ml_service"),
+                "environmental_context": {
+                    "detections": detection_data.get("detections"),
+                    "location": detection_data.get("location"),
+                    "consciousness_state": analysis.get("consciousness_metrics", {}).get("consciousness_state"),
+                },
+                "risk_assessment": {
+                    "risk_score": analysis.get("risk_assessment", {}).get("score"),
+                    "risk_level": analysis.get("risk_assessment", {}).get("level"),
+                    "odu_pattern": analysis.get("odu_pattern"),
+                    "ubuntu_guidance": analysis.get("ubuntu_guidance"),
+                    "reasoning": analysis.get("reasoning_chain"),
+                    "full_analysis": analysis
+                }
             }
             
-            # Note: Assumes a 'detection_history' table exists in Supabase
-            result = self.supabase.table("detection_history").insert(payload).execute()
-            logger.info(f"[GRID] Persistence successful in Supabase: {result.data[0].get('id') if result.data else 'Success'}")
+            result = self.supabase.table("detection_patterns").insert(payload).execute()
+            logger.info(f"[GRID] Persistence successful in detection_patterns: {result.data[0].get('id') if result.data else 'Success'}")
         except Exception as e:
             logger.error(f"[GRID] Supabase persistence failed: {e}")
 
@@ -89,7 +104,7 @@ class GridManager:
         if not self.neo4j_driver:
             return
 
-        with self.neo4j_driver.session() as session:
+        with self.neo4j_driver.session(database=self.neo4j_db) as session:
             try:
                 # Cypher logic: Create Habitat if not exists, create DetectionNode, link them
                 location = detection_data.get("location", {})
@@ -150,7 +165,7 @@ class GridManager:
             logger.warning("[GRID] Neo4j not available for risk query")
             return {"error": "Knowledge graph unavailable"}
         
-        with self.neo4j_driver.session() as session:
+        with self.neo4j_driver.session(database=self.neo4j_db) as session:
             try:
                 # Query by habitat proximity if lat/lon provided
                 if lat is not None and lon is not None:
